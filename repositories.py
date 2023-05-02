@@ -32,12 +32,30 @@ class RepositorioSolicitacao:
     
     @staticmethod
     def get_by_solicitante_id(db: Session, id: int) -> list(Solicitacao):
-        return db.query(Solicitacao).filter(Solicitacao.usuario_solicitante_id == id)
+        return db.query(Solicitacao).filter(Solicitacao.usuario_solicitante_id == id).all()
     
     @staticmethod
     def get_by_aprovador_id(db: Session, id: int) -> list(Solicitacao):
-        return db.Query(Solicitacao).filter(Solicitacao.usuario_aprovador_id == id)
+        return db.query(Solicitacao).filter(Solicitacao.usuario_aprovador_id == id).all()
     
     @staticmethod
     def get_by_nome_gerencia_curso(db: Session, gerencia: Solicitacao.nome_gerencia_curso) -> list(Solicitacao):
-        return db.Query(Solicitacao).filter(Solicitacao.nome_gerencia_curso == gerencia)
+        return db.query(Solicitacao).filter(Solicitacao.nome_gerencia_curso == gerencia).all()
+    
+    @staticmethod
+    def get_between_dates(db: Session, dt_inicio: Solicitacao.data_criacao, dt_fim: Solicitacao.data_atualizacao)  -> list(Solicitacao):
+        return db.query(Solicitacao).filter(Solicitacao.data_criacao >= dt_inicio, Solicitacao.data_atualizacao <= dt_fim).all()
+    
+    @staticmethod
+    def get_by_status(db: Session, status: Solicitacao.status) -> list(Solicitacao):
+        return db.query(Solicitacao).filter(Solicitacao.status == status).all()
+    
+    @staticmethod
+    def get_by_solic_id(db: Session, id: int) -> list(Solicitacao):
+        return db.query(Solicitacao).filter(Solicitacao.id == id).all()
+    
+class RepositorioReserva:
+
+    @staticmethod
+    def get_by_solicitacao_id(db: Session, id: int) -> list(Reserva):
+        return db.query(Reserva).filter(Reserva.solicitacao_id == id).all()
