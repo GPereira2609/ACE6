@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db_almoxarifado
+    ports:
+      - 54320:5432
+    volumes:
+      - ./.docker/psql:/var/lib/postgresql/data
+    networks:
+      - database
+      
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - database
+
+networks:
+  database:
+    driver: bridge
