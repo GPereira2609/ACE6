@@ -9,6 +9,7 @@ auth_service = AuthService(session)
 
 auth_router = APIRouter()
 
-@auth_router.post(path='/registrar', response_model=UsuarioOut)
+
+@auth_router.post('/registrar', response_model=UsuarioOut)
 def registrar(data: UsuarioIn):
-    return auth_service.register(data) 
+    return auth_service.register(data)

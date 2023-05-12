@@ -1,13 +1,10 @@
-from app.database.db import Base
-from app.models.estoque import Estoque
-from app.models.reserva import Reserva
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.types import TIMESTAMP
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import PrimaryKeyConstraint
+
+from app.database.db import Base
+
 
 class Material(Base):
-
     __tablename__ = 'materiais'
 
     id = Column(Integer, primary_key=True, nullable=False, index=True)

@@ -1,10 +1,8 @@
-from app.database.db import Base
-from app.models.requisicao import Requisicao
-from app.models.material import Material
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.types import TIMESTAMP
+from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import PrimaryKeyConstraint
+
+from app.database.db import Base
+
 
 class Reserva(Base):
     __tablename__ = 'reservas'

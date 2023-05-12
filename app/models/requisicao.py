@@ -1,13 +1,11 @@
-from app.database.db import Base
-from app.models.usuario import Usuario
-from app.models.reserva import Reserva
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.types import TIMESTAMP
+from sqlalchemy import Column, Integer, String, ForeignKey, func
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import PrimaryKeyConstraint
+from sqlalchemy.types import TIMESTAMP
+
+from app.database.db import Base
+
 
 class Requisicao(Base):
-
     __tablename__ = 'requisicoes'
 
     id = Column(Integer, primary_key=True, nullable=False, index=True)

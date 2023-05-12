@@ -1,12 +1,10 @@
-from app.database.db import Base
-from app.models.requisicao import Requisicao
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.types import TIMESTAMP
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import PrimaryKeyConstraint
+
+from app.database.db import Base
+
 
 class Usuario(Base):
-
     __tablename__ = 'usuarios'
 
     id = Column(Integer, primary_key=True, nullable=False, index=True)
