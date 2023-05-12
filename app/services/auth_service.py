@@ -11,13 +11,17 @@ class AuthService:
     def __init__(self, db: Session):
         self.db = db
 
-    def register(self, user: UsuarioIn) -> UsuarioOut:
-        if self.db.query(Usuario).filter(Usuario.email == user.email).first():
-            return HTTPException(status_code=409, detail="O usuário já está cadastrado")
+    def register(self, request: UsuarioIn) -> UsuarioOut:
+        data = request.dict()
+
+        user_exist = self.db.query(Usuario).filter_by(email=data['email']).all()
+
+        if user_exist:
+            raise HTTPException(status_code=409, detail="O usuário já está cadastrado")
         else:
-            user_bd = Usuario(**user.dict(), senha=get_hashed_password(user.senha))
+            user_bd = Usuario(**{**data, "senha": get_hashed_password(data["senha"])})
             self.db.add(user_bd)
             self.db.commit()
-            self.db.refresh()
+            self.db.refresh(user_bd)
 
-        return user
+        return UsuarioOut(id=user_bd.id, email=user_bd.email, nome=user_bd.nome, role=user_bd.role)
