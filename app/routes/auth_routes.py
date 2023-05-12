@@ -1,7 +1,8 @@
 from fastapi import APIRouter
-from app.services.auth_service import AuthService
+
 from app.database.db import get_db
 from app.schemas.UsuarioSchema import UsuarioIn, UsuarioOut
+from app.services.auth_service import AuthService
 
 session = get_db()
 
@@ -11,5 +12,5 @@ auth_router = APIRouter()
 
 
 @auth_router.post('/registrar', response_model=UsuarioOut)
-def registrar(data: UsuarioIn):
+def register(data: UsuarioIn):
     return auth_service.register(data)
