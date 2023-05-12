@@ -3,7 +3,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 class UsuarioBase(BaseModel):
     nome: str = Field(..., min_length=5, max_length=60)
-    email = EmailStr
+    email: EmailStr
 
 
 class UsuarioIn(UsuarioBase):
@@ -12,6 +12,7 @@ class UsuarioIn(UsuarioBase):
 
 class UsuarioOut(UsuarioBase):
     id: int
+    role: str
 
     class Config:
         orm_mode = True
